@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minha Lista</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <div th:replace="~{fragments/top :: top}"></div>
+    <div th:replace="~{fragments/sid :: sid}"></div>
+
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="row mb-2">
+                    <div class="col-sm-30"></div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- /.card -->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h2>Lista de Moto Taxistas</h2>
+                                <h2 th:if="${#lists.isEmpty(nomes)}">Sem Nomes cadastrados!</h2>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                        title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" placeholder="Pesquisar Nomes">
+                                    <div class="input-group-append">
+                                        <div class="btn btn-primary">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div th:if="${not #lists.isEmpty(nomes)}">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>NOME</th>
+                                                <th>ORIGEM</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="nome : ${nomes}">
+                                                <td th:text="${nome.nome}"></td>
+                                                <td th:text="${nome.origem}"></td>
+
+                                                <td class="project-actions text-right">
+                                                    <a class="btn btn-info btn-sm"
+                                                        th:href="@{/nomes/edit/{id}(id=${nome.id})}">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm"
+                                                        th:href="@{/nomes/delete/{id}(id=${nome.id})}">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header"></div>
+                            <div class="card-body pad table-responsive">
+                                <table class="table table-bordered text-center">
+                                    <tr>
+                                        <td>
+                                            <a href="/nomes/finalizar"
+                                                class="btn btn-block btn-outline-primary btn-lg">Finalizar
+                                                Consulta</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.min.js"></script>
+
+</body>
+
+</html>
